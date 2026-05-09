@@ -30,7 +30,7 @@
             android:layout_marginTop="12dp" />
 
         <TextView
-            android:id="@+id/tvClassStats"
+            android:id="@+id/tvStudentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#AAAAAA"
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SESSIONS"
+            android:text="STUDENTS"
             android:textColor="#AAAAAA"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -50,49 +50,26 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sessionsRecyclerView"
+        android:id="@+id/studentsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/headerSection"
-        android:layout_above="@id/bottomButtons"
+        android:layout_above="@id/btnNewStudent"
         android:layout_marginTop="12dp"
         android:paddingBottom="16dp"
         android:clipToPadding="false" />
 
-    <LinearLayout
-        android:id="@+id/bottomButtons"
+    <Button
+        android:id="@+id/btnNewStudent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <Button
-            android:id="@+id/btnStudents"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#2C2C2C"
-            android:text="Students"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:cornerRadius="12dp" />
-
-        <Button
-            android:id="@+id/btnNewSession"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#2C2C2C"
-            android:text="+ New Session"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:cornerRadius="12dp" />
-
-    </LinearLayout>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#2C2C2C"
+        android:text="+ New Student"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:cornerRadius="12dp" />
 
 </RelativeLayout>

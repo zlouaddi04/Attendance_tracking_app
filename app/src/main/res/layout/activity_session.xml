@@ -21,7 +21,7 @@
             app:tint="#FFFFFF" />
 
         <TextView
-            android:id="@+id/tvClassName"
+            android:id="@+id/tvSessionDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
@@ -30,7 +30,7 @@
             android:layout_marginTop="12dp" />
 
         <TextView
-            android:id="@+id/tvClassStats"
+            android:id="@+id/tvSessionTopic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#AAAAAA"
@@ -38,9 +38,18 @@
             android:layout_marginTop="4dp" />
 
         <TextView
+            android:id="@+id/tvPresentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SESSIONS"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STUDENTS"
             android:textColor="#AAAAAA"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -50,7 +59,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sessionsRecyclerView"
+        android:id="@+id/attendanceRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/headerSection"
@@ -68,26 +77,23 @@
         android:layout_marginBottom="16dp">
 
         <Button
-            android:id="@+id/btnStudents"
-            android:layout_width="0dp"
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
             android:backgroundTint="#2C2C2C"
-            android:text="Students"
+            android:text="Edit Attendance"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:cornerRadius="12dp" />
 
         <Button
-            android:id="@+id/btnNewSession"
-            android:layout_width="0dp"
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#2C2C2C"
-            android:text="+ New Session"
+            android:visibility="gone"
+            android:backgroundTint="#4CAF50"
+            android:text="Save Attendance"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"

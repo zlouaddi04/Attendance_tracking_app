@@ -244,6 +244,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+
+    // in DatabaseHelper.java
+    public SessionModel getSessionById(int sessionId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_SESSIONS + " WHERE " + COL_ID + "=?",
+                new String[]{String.valueOf(sessionId)});
+        SessionModel session = null;
+        if (cursor.moveToFirst()) {
+            session = new SessionModel(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_SESSION_CLASS_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_SESSION_DATE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_SESSION_TOPIC))
+            );
+        }
+        cursor.close();
+        return session;
+    }
+
     public void deleteSession(int sessionId) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_SESSIONS, COL_ID + "=?", new String[]{String.valueOf(sessionId)});
@@ -332,6 +352,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) count = cursor.getInt(0);
         cursor.close();
         return count;
+    }
+
+    // get total present marks across all sessions in a class
+    public int getTotalPresentForClass(int classId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(*) FROM " + TABLE_ATTENDANCE + " a " +
+                        "JOIN " + TABLE_SESSIONS + " s ON a." + COL_ATT_SESSION_ID + " = s." + COL_ID +
+                        " WHERE s." + COL_SESSION_CLASS_ID + "=? AND a." + COL_ATT_IS_PRESENT + "=1",
+                new String[]{String.valueOf(classId)});
+        int count = 0;
+        if (cursor.moveToFirst()) count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
+
+    // get most absent students across all classes
+// returns students sorted by absence count descending
+    public List<String> getMostAbsentStudents(int limit) {
+        List<String> result = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT s." + COL_STUDENT_NAME + ", " +
+                        "COUNT(*) as absence_count " +
+                        "FROM " + TABLE_ATTENDANCE + " a " +
+                        "JOIN " + TABLE_STUDENTS + " s ON a." + COL_ATT_STUDENT_ID + " = s." + COL_ID +
+                        " WHERE a." + COL_ATT_IS_PRESENT + "=0 " +
+                        "GROUP BY a." + COL_ATT_STUDENT_ID + " " +
+                        "ORDER BY absence_count DESC " +
+                        "LIMIT ?",
+                new String[]{String.valueOf(limit)});
+        if (cursor.moveToFirst()) {
+            do {
+                String name         = cursor.getString(0);
+                int    absenceCount = cursor.getInt(1);
+                result.add(name + " — " + absenceCount + " absences");
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return result;
     }
 
 }

@@ -7,8 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.attendance_tracking_app.db.DatabaseHelper;
-import com.example.attendance_tracking_app.models.AttendanceRecord;
-import com.example.attendance_tracking_app.models.StudentModel;
+import com.example.attendance_tracking_app.models.*;
 import java.util.List;
 
 public class AttendanceViewModel extends AndroidViewModel{
@@ -33,6 +32,10 @@ public class AttendanceViewModel extends AndroidViewModel{
         this.classId   = classId;
         students.setValue(db.getStudentsByClass(classId));
         records.setValue(db.getAttendanceBySession(sessionId));
+    }
+    // in AttendanceViewModel.java
+    public SessionModel getSession(int sessionId) {
+        return db.getSessionById(sessionId);
     }
 
     public void markAttendance(AttendanceRecord record) {

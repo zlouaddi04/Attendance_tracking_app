@@ -1,4 +1,4 @@
-package com.example.attendance_tracking_app;
+package com.example.attendance_tracking_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.attendance_tracking_app.R;
 import com.example.attendance_tracking_app.adapters.ClassesAdapter;
 import com.example.attendance_tracking_app.models.ClassModel;
 import com.example.attendance_tracking_app.viewmodels.ClassViewModel;
